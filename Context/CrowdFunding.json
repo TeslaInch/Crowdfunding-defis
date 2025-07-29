@@ -50,6 +50,11 @@
     {
       "inputs": [
         {
+          "internalType": "address",
+          "name": "_owner",
+          "type": "address"
+        },
+        {
           "internalType": "string",
           "name": "_title",
           "type": "string"
@@ -95,13 +100,7 @@
       "type": "function"
     },
     {
-      "inputs": [
-        {
-          "internalType": "uint256",
-          "name": "_id",
-          "type": "uint256"
-        }
-      ],
+      "inputs": [],
       "name": "getCampaigns",
       "outputs": [
         {
@@ -147,7 +146,7 @@
               "type": "uint256[]"
             }
           ],
-          "internalType": "struct CrowdFunding.Campaign[]",
+          "internalType": "struct CrowFunding.Campaign[]",
           "name": "",
           "type": "tuple[]"
         }

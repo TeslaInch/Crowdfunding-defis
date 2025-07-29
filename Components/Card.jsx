@@ -1,58 +1,61 @@
 import React from "react";
 
-const Card = ({ allCampaign, setOpenModel, setDonate, title }) => {
-  console.log(allCampaign);
-
-  const daysLeft = (deadline) => {
-    const difference = new Date(deadline).getTime() - Date.now();
-    return Math.max(Math.floor(difference / (1000 * 3600 * 24)), 0);
-  };
-
+const Card = ({ title, allCampaign, setOpenModel, setDonate, address }) => {
   return (
-    <div className="px-4 py-16 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8 lg:py-20">
-      <p className="py-16 text-2xl font-bold leading-5">{title}</p>
+    <div className="py-8 px-4 md:px-12">
+      <h2 className="text-2xl md:text-3xl font-semibold mb-6">{title}</h2>
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        {allCampaign.length === 0 ? (
+          <p className="text-gray-500 col-span-full">No campaigns found.</p>
+        ) : (
+          allCampaign.map((campaign, i) => {
+            const isOwner =
+              address &&
+              campaign?.owner &&
+              address.toLowerCase() === campaign.owner.toLowerCase();
 
-      <div className="grid gap-5 lg:grid-cols-3 sm:max-w-sm sm:mx-auto lg:max-w-full">
-        {allCampaign && allCampaign.length > 0 ? (
-          allCampaign.map((campaign, i) => (
-            <div
-              onClick={() => {
-                setDonate(campaign);
-                setOpenModel(true);
-              }}
-              key={i}
-              className="cursor-pointer border overflow-hidden transition-shadow duration-200 bg-white rounded"
-            >
-              <img
-                src={campaign.image || "https://via.placeholder.com/150"}
-                className="object-cover w-full rounded"
-                alt="Campaign"
-              />
-              <div className="py-5 pl-2">
-                <p className="mb-2 text-xs font-bold text-gray-600 uppercase">
-                  Days Left: {daysLeft(campaign.deadline)}
-                </p>
-                <a
-                  href={`/campaign/${campaign.pID}`}
-                  aria-label="Article"
-                  className="inline-block mb-3 text-black transition duration-200 hover:text-deep-purple-accent-700"
-                >
-                  <p className="text-2xl font-bold leading-5">{campaign.title}</p>
-                </a>
-                <p className="mb-4 text-gray-700">{campaign.description}</p>
-                <div className="flex space-x-4">
-                  <p className="font-semibold">Target: {campaign.target} ETH</p>
-                  <p className="font-semibold">
-                    Raised: {campaign.amountCollected} ETH
+            return (
+              <div
+                key={i}
+                className="bg-white shadow-md rounded-lg overflow-hidden hover:shadow-xl transition-shadow"
+              >
+                <div className="p-6">
+                  <h3 className="text-xl font-semibold mb-2">
+                    {campaign.title}
+                  </h3>
+                  <p className="text-gray-700 text-sm mb-4 line-clamp-3">
+                    {campaign.description}
                   </p>
+                  <div className="text-gray-600 text-sm mb-2">
+                    <strong>Target:</strong> {campaign.target} ETH
+                  </div>
+                  <div className="text-gray-600 text-sm mb-4">
+                    <strong>Raised:</strong> {campaign.amountCollected} ETH
+                  </div>
+
+                  {/* Disable donation if this is the user's own campaign */}
+                  {isOwner ? (
+                    <button
+                      disabled
+                      className="w-full bg-gray-300 text-gray-600 cursor-not-allowed px-4 py-2 rounded-md"
+                    >
+                      Cannot Donate to Your Own Campaign
+                    </button>
+                  ) : (
+                    <button
+                      onClick={() => {
+                        setDonate(campaign);
+                        setOpenModel(true);
+                      }}
+                      className="w-full bg-purple-600 text-white px-4 py-2 rounded-md hover:bg-purple-700 transition-colors"
+                    >
+                      Donate
+                    </button>
+                  )}
                 </div>
               </div>
-            </div>
-          ))
-        ) : (
-          <p className="text-center text-gray-500 text-lg font-semibold">
-            No campaigns found
-          </p>
+            );
+          })
         )}
       </div>
     </div>

@@ -1,57 +1,83 @@
-import React, {useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 
-const PupUp = ({setOpenModal, donate, donateFunction, getDonations}) => {
-  const [amount, setAmount] = useState("")
-  const [allDonationData, setAllDonationData] = useState("")
-  const createDonation = async()=>{
+const PopUp = ({ setOpenModel, donate, donateFunction, getDonations }) => {
+  const [amount, setAmount] = useState("");
+  const [allDonationData, setAllDonationData] = useState([]);
+
+  const createDonation = async () => {
     try {
-      const data = await donateFunction(donate.pId, amount)
+      const data = await donateFunction(donate.pId, amount);
       console.log(data);
     } catch (error) {
       console.log(error);
-      
     }
-  }
-  useEffect(()=>{
-    const donationListData = getDonations(pId)
-    return async()=>{
-      const donationData = await donationListData
-      setAllDonationData(donationData)
+  };
+
+  useEffect(() => {
+    const fetchDonations = async () => {
+      const donationData = await getDonations(donate.pId);
+      setAllDonationData(donationData);
     };
-  }, [])
+    fetchDonations();
+  }, [donate.pId, getDonations]);
+
   return (
-    <>
-    <div className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none">
-      <div className="relative w-auto my-6 mx-auto max-w-3xl">
-        <div className="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
-          <div className="flex items-start justify-between p-5 border-b border-solid border-slate-200 rounded-t">
-            <h3 className="text-3xl font-serif">{donate.title}</h3>
-            <button className="p-1 ml-auto bg-transparent border-0 text-black opacity-5 float-right text-3xl leading-none font-semibold outline-none focus:outline-none" onClick={()=>setOpenModal(false)}></button>
-            <span className="bg-transparent text-black opacity-5 h-6 w-6 text-2xl block outline-none focus:outline-none">X</span>
-          </div>
-          <div className="relative p-6 flex-auto">
-            <p className="my-4 text-slate-500 text-lg leading-relaxed">{donate.description}</p>
-            <input type="text" onChange={(e)=> setAmount(e.target.value)} placeholder="Amount" required className="flex-grow w-full h-12 px-4 mb-2 transition duration-200
-            bg-white border border-gray-300 rounded shadow-sm appearance-none focus:outline-none focus:border-deep-purple-accent-400  focus:shadow-outline" id="firstName" name="firstName" />
-            {allDonationData?.map((donate, i)=> {
-              <p className="my-4 text-slate-500 text-lg leading-relaxed">{1 + i}: {donate.donation}{""}{donate.donator.slice(0,35)}</p>
-            })}
-            <div className="flex items-center justify-end p-6 border-t border-solid border-gray-200 rounded-b">
-              <button className="text-red-500 bg-transparent font-bold uppercase px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150 "
-              type="button" onClick={()=>setOpenModal(false)}>close</button>
-              <button className="background text-white active:bg-emerald-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1
-              ease-linear transition-all duration-150" type="button" onClick={()=>createDonation()}>Donate</button>
-            </div>
-          </div>
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
+      <div className="bg-white rounded-lg shadow-xl w-full max-w-2xl mx-4 relative">
+        {/* Close Button */}
+        <button
+          onClick={() => setOpenModel(false)}
+          className="absolute top-3 right-3 text-gray-500 hover:text-black text-2xl font-bold"
+        >
+          ✕
+        </button>
+
+        {/* Modal Header */}
+        <div className="p-6 border-b border-gray-200">
+          <h3 className="text-2xl font-semibold">{donate.title}</h3>
+        </div>
+
+        {/* Modal Body */}
+        <div className="p-6">
+          <p className="mb-4 text-gray-600">{donate.description}</p>
+          <input
+            type="text"
+            onChange={(e) => setAmount(e.target.value)}
+            placeholder="Amount (ETH)"
+            required
+            className="w-full px-4 py-2 border border-gray-300 rounded mb-4 focus:outline-none focus:ring focus:border-blue-400"
+          />
+
+          {Array.isArray(allDonationData) && allDonationData.length > 0 ? (
+            allDonationData.map((donate, i) => (
+              <p key={i} className="text-gray-500 text-sm mb-1">
+                {i + 1}: {donate.donation} ETH —{" "}
+                {donate.donator.slice(0, 35)}...
+              </p>
+            ))
+          ) : (
+            <p className="text-gray-400 text-sm">No donations yet.</p>
+          )}
+        </div>
+
+        {/* Modal Footer */}
+        <div className="p-6 border-t border-gray-200 flex justify-end gap-2">
+          <button
+            className="text-gray-600 hover:text-black px-4 py-2"
+            onClick={() => setOpenModel(false)}
+          >
+            Close
+          </button>
+          <button
+            className="bg-purple-600 text-white px-4 py-2 rounded hover:bg-purple-700"
+            onClick={createDonation}
+          >
+            Donate
+          </button>
         </div>
       </div>
-      <div className="opacity-25 fixed inset-0 z-40 bg-black">
-        
-      </div>
     </div>
-  
-    </>
-  )
+  );
 };
 
-export default PupUp;
+export default PopUp;

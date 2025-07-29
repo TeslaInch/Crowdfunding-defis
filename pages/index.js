@@ -1,6 +1,6 @@
-import  { useEffect, useState, useContext } from "react";
+import { useEffect, useState, useContext } from "react";
 
-// Internal import
+// Internal imports
 import { CrowdFundingContext } from "../Context/CrowdFunding";
 import { Hero, Card, PopUp } from "../Components";
 
@@ -12,41 +12,54 @@ const Index = () => {
     donate,
     getUserCampaigns,
     getDonations,
+    currentAccount
   } = useContext(CrowdFundingContext);
 
   const [allCampaign, setAllCampaign] = useState([]);
   const [userCampaign, setUserCampaign] = useState([]);
-  useEffect(() => {
-      const getCampaignData = getCampaigns();
-      const userCampaignsData =  getUserCampaigns();
-     return async ()=>{
-       const allData = await getCampaignData
-       const userData = await getUserCampaigns
-       setAllCampaign(allData)
-       setUserCampaign(userData)
-     };
-  }, []);
-
   const [openModel, setOpenModel] = useState(false);
   const [donateCampaign, setDonateCampaign] = useState(null);
-  console.log(donateCampaign);
-  
-  
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const allData = await getCampaigns();
+      const userData = await getUserCampaigns();
+
+      // Optional: Remove user campaigns from the all campaigns list
+      const filteredAllCampaigns = allData.filter(
+        (campaign) => !userData.some((user) => user.pId === campaign.pId)
+      );
+
+      setAllCampaign(filteredAllCampaigns);
+      setUserCampaign(userData);
+    };
+
+    fetchData();
+  }, []);
+
   return (
     <>
       <Hero titleData={titleData} createCampaign={createCampaign} />
+
+      {/* All Listed Campaigns (excluding yours) */}
       <Card
         title="All Listed Campaigns"
-        allCampaign = {allCampaign}
-        setOpenModel = {setOpenModel}
-        setDonate = {setDonateCampaign}
+        allCampaign={allCampaign}
+        setOpenModel={setOpenModel}
+        setDonate={setDonateCampaign}
+        address={currentAccount}
       />
+
+      {/* Only your campaigns */}
       <Card
-        title="Your Created Campaign"
-        allCampaign = {userCampaign}
-        setOpenModel ={setOpenModel}
-        setDonate = {setDonateCampaign}
+        title="Your Created Campaigns"
+        allCampaign={userCampaign}
+        setOpenModel={setOpenModel}
+        setDonate={setDonateCampaign}
+        address={currentAccount}
       />
+
+      {/* Donation Pop-Up */}
       {openModel && (
         <PopUp
           setOpenModel={setOpenModel}

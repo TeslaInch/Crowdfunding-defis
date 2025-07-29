@@ -1,9 +1,9 @@
 {
   "_format": "hh-sol-cache-2",
   "files": {
-    "C:\\Users\\NEWMAN\\Desktop\\master\\Croud-funding-starter-file-main\\contracts\\CrowdFunding.sol": {
-      "lastModificationDate": 1750192848734,
-      "contentHash": "b28c2385b4b7eeed7bd9354a6e46a1d9",
+    "C:\\Users\\TESLA\\Desktop\\Crowdfunding\\contracts\\CrowdFunding.sol": {
+      "lastModificationDate": 1753724378914,
+      "contentHash": "28de2ef88a90805e6ac3999f1440f7af",
       "sourceName": "contracts/CrowdFunding.sol",
       "solcConfig": {
         "version": "0.8.18",

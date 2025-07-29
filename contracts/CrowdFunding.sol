@@ -1,5 +1,6 @@
 pragma solidity ^0.8.9;
 
+
 contract CrowFunding  {
     struct Campaign {
         address owner;
@@ -17,28 +18,26 @@ contract CrowFunding  {
 
     function createCampaign(
     address _owner,
-    string memory _title, 
+    string memory _title,
     string memory _description,
-    uint256 _target,  
+    uint256 _target,
     uint256 _deadline
-    ) public returns (uint256)
-    {
-        Campaign storage campaign = campaigns[numberOfCampaigns];
+) public returns (uint256) {
+    require(_deadline > block.timestamp, "Deadline should be a future date.");
 
-        require(campaign.deadline < block.timestamp, "This deadline should be a date in the future."); 
+    Campaign storage campaign = campaigns[numberOfCampaigns];
 
-        // campaign.owner = _owner;
-        campaign.owner = _owner;
-        campaign.title = _title;
-        campaign.description = _description;
-        campaign.target = _target;
-        campaign.deadline = _deadline;
-        campaign.amountCollected = 0;
+    campaign.owner = _owner;
+    campaign.title = _title;
+    campaign.description = _description;
+    campaign.target = _target;
+    campaign.deadline = _deadline;
+    campaign.amountCollected = 0;
 
-        numberOfCampaigns++;
+    numberOfCampaigns++;
 
-        return numberOfCampaigns - 1;
-    }
+    return numberOfCampaigns - 1;
+}
 
     function donateToCampaign(uint256 _id) public payable {  
         uint256 amount = msg.value;

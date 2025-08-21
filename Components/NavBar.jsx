@@ -5,7 +5,7 @@ import { CrowdFundingContext } from "../Context/CrowdFunding";
 import Logo from "./Logo";
 import Menu from "./menu";
 
-function NavBar() {
+export default function Navbar() {
   const { currentAccount, connectWallet } = useContext(CrowdFundingContext);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const menuList = ["whitepaper", "project", "donations", "members"];
@@ -136,4 +136,3 @@ function NavBar() {
   );
 }
 
-export default NavBar;

@@ -3,7 +3,7 @@ import Head from 'next/head';
 import Link from 'next/link';
 import { CrowdFundingContext } from '../Context/CrowdFunding'; 
 
-export default function Project() {
+export default function project() {
   const { donations } = useContext(CrowdFundingContext);
 
   const projects = [

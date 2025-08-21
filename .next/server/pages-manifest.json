@@ -2,8 +2,9 @@
   "/_app": "pages/_app.js",
   "/_error": "pages/_error.js",
   "/_document": "pages/_document.js",
-  "/project": "pages/project.js",
+  "/whitepaper": "pages/whitepaper.js",
   "/": "pages/index.js",
   "/members": "pages/members.js",
-  "/whitepaper": "pages/whitepaper.js"
+  "/donations": "pages/donations.js",
+  "/project": "pages/project.js"
 }

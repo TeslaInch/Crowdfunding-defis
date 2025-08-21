@@ -2,10 +2,10 @@ import React, { useState, useContext } from "react";
 import Link from 'next/link';
 
 import { CrowdFundingContext } from "../Context/CrowdFunding";
-import Logo from "./Logo";
-import Menu from "./menu";
-
-export default function Navbar() {
+// import { Logo } from "./Logo";
+import Logo from "./Logo"
+import Menu from "./Menu"
+const Navbar =() => {
   const { currentAccount, connectWallet } = useContext(CrowdFundingContext);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const menuList = ["whitepaper", "project", "donations", "members"];
@@ -62,7 +62,7 @@ export default function Navbar() {
               className="p-2 -mr-1 transition duration-200 focus:outline-none focus:shadow-outline"
               onClick={() => setIsMenuOpen(true)}
             >
-              <Menu />
+               <Menu />
             </button>
             {isMenuOpen && (
               <div className="absolute top-0 left-0 w-full">
@@ -135,4 +135,5 @@ export default function Navbar() {
     </div>
   );
 }
+export default Navbar
 

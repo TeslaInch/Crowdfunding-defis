@@ -12,4 +12,4 @@ const ICON = () => {
   );
 };
 
-export default ICON;
+export default ICON

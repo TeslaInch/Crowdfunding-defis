@@ -61,5 +61,4 @@ const Card = ({ title, allCampaign, setOpenModel, setDonate, address }) => {
     </div>
   );
 };
-
-export default Card;
+export default Card

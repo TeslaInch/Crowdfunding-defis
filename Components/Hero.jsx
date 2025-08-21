@@ -142,4 +142,4 @@ const Hero = ({ titleData, createCampaign }) => {
   );
 };
 
-export default Hero;
+export default Hero

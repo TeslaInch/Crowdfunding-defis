@@ -1,6 +1,6 @@
 import React from "react";
 
-const Arrow = () => {
+ const Arrow = () => {
   return (
     <svg
       className="inline-block w-3 ml-2"
@@ -11,5 +11,5 @@ const Arrow = () => {
     </svg>
   );
 };
+export default Arrow
 
-export default Arrow;

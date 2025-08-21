@@ -1,4 +1,4 @@
-const Logo = ({ color }) => {
+ const Logo = ({ color }) => {
   return (
     <svg
       className={`w-8 ${color} text-teal-accent-400`} 
@@ -17,5 +17,6 @@ const Logo = ({ color }) => {
     </svg>
   );
 };
+export default Logo
 
-export default Logo;
+

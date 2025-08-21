@@ -1,6 +1,6 @@
 import React from "react";
 
-const menu = () => {
+const Menu = () => {
   return (
     <svg className="w-5 text-white" viewBox="0 0 24 24">
       <path
@@ -18,5 +18,5 @@ const menu = () => {
     </svg>
   );
 };
+export default Menu
 
-export default menu;

@@ -1,7 +1,6 @@
 import { useContext } from 'react';
 import Head from 'next/head';
 import Link from 'next/link';
-// import { CrowdFundingContext } from '../components/CrowdFundingProvider'; // Adjust path as needed
 import { CrowdFundingContext } from '../Context/CrowdFunding';
 export default function whitepaper() {
   const { donations } = useContext(CrowdFundingContext);

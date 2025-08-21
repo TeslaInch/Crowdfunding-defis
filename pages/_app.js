@@ -1,8 +1,6 @@
 import "../styles/globals.css";
-import NavBar from "../Components/NavBar";
-import Footer from "../Components/Footer";
-
-// ✅ Make sure this import path is correct!
+import NavBar from "../Components/navbar";
+import { Footer } from "../Components";
 import { CrowdFundingProvider } from "../Context/CrowdFunding";
 console.log("CrowdFundingProvider:", CrowdFundingProvider);
 

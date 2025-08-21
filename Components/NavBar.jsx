@@ -1,43 +1,44 @@
 import React, { useState, useContext } from "react";
+import Link from 'next/link';
 
-// internal import
 import { CrowdFundingContext } from "../Context/CrowdFunding";
-import { Logo, Menu } from "../Components/index";
+import Logo from "./Logo";
+import Menu from "./menu";
 
 function NavBar() {
   const { currentAccount, connectWallet } = useContext(CrowdFundingContext);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const menuList = ["White paper", "Project", "Donation", "Members"];
-
+  const menuList = ["whitepaper", "project", "donations", "members"];
+    
   return (
     <div className="backgroundMain">
       <div className="px-4 py-5 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8">
         <div className="relative flex items-center justify-between">
           <div className="flex items-center">
-            <a
+            <Link
               href="/"
               aria-label="Company"
               title="Company"
               className="inline-flex items-center mr-8"
             >
-              <Logo color="text-white" />
+              <Logo color="text-white" alt="Company Logo" />
               <span className="ml-2 text-xl font-bold tracking-wide text-gray-100 uppercase">
                 Company
               </span>
-            </a>
+            </Link>
             <ul className="flex items-center hidden space-x-8 lg:flex">
-              {menuList.map((el, i) => (
-                <li key={i + 1}>
-                  <a
-                    href="/"
-                    aria-label="Our product"
-                    title="Our product"
-                    className="font-medium tracking-wide text-gray-100 transition-colors duration-200 hover:text-teal-accent-400"
-                  >
-                    {el}
-                  </a>
-                </li>
-              ))}
+             {menuList.map((el, i) => (
+              <li key={i + 1}>
+                <Link
+                  href={el === 'Company' ? '/' : `/${el}`}
+                  aria-label={el}
+                  title={el}
+                  className="font-medium tracking-wide text-gray-100 transition-colors duration-200 hover:text-teal-accent-400"
+                >
+                  {el}
+                </Link>
+              </li>
+            ))}
             </ul>
           </div>
           {!currentAccount && (
@@ -68,7 +69,7 @@ function NavBar() {
                 <div className="p-5 bg-white border rounded shadow-sm">
                   <div className="flex items-center justify-center mb-4">
                     <div>
-                      <a
+                      <Link
                         href="/"
                         aria-label="Company"
                         title="Company"
@@ -78,7 +79,7 @@ function NavBar() {
                         <span className="ml-2 text-xl font-bold tracking-wide text-gray-800 uppercase">
                           Company
                         </span>
-                      </a>
+                      </Link>
                     </div>
                     <div>
                       <button

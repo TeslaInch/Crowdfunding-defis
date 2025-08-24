@@ -1,6 +1,7 @@
 import React, { useState, useContext } from "react";
 import Link from 'next/link';
 
+
 import { CrowdFundingContext } from "../Context/CrowdFunding";
 // import { Logo } from "./Logo";
 import Logo from "./Logo.jsx"

@@ -3,9 +3,9 @@ import { useEffect, useState, useContext } from "react";
 // Internal imports
 import { CrowdFundingContext } from "../Context/CrowdFunding";
 // import { Hero, Card, PopUp } from "../Components";
-import Hero from "../components/Hero"
-import Card from "../components/Card"
-import PopUp from "../components/PopUp"
+import Hero from "../Components/Hero"
+import Card from "../Cardomponents/Card"
+import PopUp from "../Components/PopUp"
 
 const Index = () => {
   const {

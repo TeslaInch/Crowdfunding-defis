@@ -1,6 +1,6 @@
 import "../styles/globals.css";
 import Footer from "../Components/Footer.jsx";
-import Navbar from "../Components/Navbar.jsx";
+import Navbar from "../Components/NavBar.jsx";
 import { CrowdFundingProvider } from "../Context/CrowdFunding";
 // console.log("CrowdFundingProvider:", CrowdFundingProvider);
 

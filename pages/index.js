@@ -5,7 +5,7 @@ import { CrowdFundingContext } from "../Context/CrowdFunding";
 // import { Hero, Card, PopUp } from "../Components";
 import Hero from "../Components/Hero.jsx"
 import Card from "../Components/Card.jsx"
-import PopUp from "../Components/PopUpjsx"
+import PopUp from "../Components/PopUp.jsx"
 
 const Index = () => {
   const {

@@ -3,8 +3,8 @@ import Link from 'next/link';
 
 import { CrowdFundingContext } from "../Context/CrowdFunding";
 // import { Logo } from "./Logo";
-import Logo from "./Logo"
-import Menu from "./Menu"
+import Logo from "./Logo.jsx"
+import Menu from "./Menu.jsx"
 const Navbar =() => {
   const { currentAccount, connectWallet } = useContext(CrowdFundingContext);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
